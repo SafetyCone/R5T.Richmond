@@ -1,0 +1,4 @@
+R5T.Richmond.Construction - A construction console-app for the library R5T.Richmond.
+
+Goals
+
