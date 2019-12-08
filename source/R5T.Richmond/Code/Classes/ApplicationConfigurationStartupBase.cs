@@ -8,7 +8,7 @@ namespace R5T.Richmond
 {
     public class ApplicationConfigurationStartupBase : StartupBase, IApplicationConfigurationStartup
     {
-        public ApplicationConfigurationStartupBase(ILogger<StartupBase> logger)
+        public ApplicationConfigurationStartupBase(ILogger<ApplicationConfigurationStartupBase> logger)
             : base(logger)
         {
         }
