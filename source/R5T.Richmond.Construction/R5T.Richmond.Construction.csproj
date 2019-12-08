@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\R5T.Edenderry.Default\source\R5T.Edenderry.Default\R5T.Edenderry.Default.csproj" />
     <ProjectReference Include="..\R5T.Richmond\R5T.Richmond.csproj" />
   </ItemGroup>
 
