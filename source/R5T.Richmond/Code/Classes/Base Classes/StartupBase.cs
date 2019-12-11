@@ -20,6 +20,23 @@ namespace R5T.Richmond
             this.Logger = logger;
         }
 
+        public void ConfigureConfiguration(IConfigurationBuilder configurationBuilder, IServiceProvider configurationServicesProvider)
+        {
+            this.Logger.LogDebug("Starting configuration of configuration builder...");
+
+            this.ConfigureConfigurationBody(configurationBuilder, configurationServicesProvider);
+
+            this.Logger.LogDebug("Finished configuration of configuration builder.");
+        }
+
+        /// <summary>
+        /// Base implementation does nothing.
+        /// </summary>
+        protected virtual void ConfigureConfigurationBody(IConfigurationBuilder configurationBuilder, IServiceProvider configurationServicesProvider)
+        {
+            // Do nothing.
+        }
+
         public void ConfigureServices(IServiceCollection services)
         {
             this.Logger.LogDebug("Starting configuration of service collection...");

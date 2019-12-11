@@ -10,6 +10,5 @@ namespace R5T.Richmond
     /// </summary>
     public interface IApplicationStartup : IStartup
     {
-        void ConfigureConfiguration(IConfigurationBuilder configurationBuilder, IServiceProvider configurationServiceProvider);
     }
 }
