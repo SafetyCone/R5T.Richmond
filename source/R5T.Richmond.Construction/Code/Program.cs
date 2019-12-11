@@ -29,7 +29,7 @@ namespace R5T.Richmond.Construction
 
         private static IServiceProvider GetServiceProvider()
         {
-            var serviceProvider = ApplicationBuilder.UseStartup<Startup, ConfigurationStartup>();
+            var serviceProvider = ApplicationBuilder.New().UseStartup<Startup, ConfigurationStartup>();
             return serviceProvider;
         }
     }
