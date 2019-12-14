@@ -20,11 +20,11 @@ namespace R5T.Richmond
             this.Logger = logger;
         }
 
-        public void ConfigureConfiguration(IConfigurationBuilder configurationBuilder, IServiceProvider configurationServicesProvider)
+        public void ConfigureConfiguration(IConfigurationBuilder configurationBuilder, IServiceProvider configurationServiceProvider)
         {
             this.Logger.LogDebug("Starting configuration of configuration builder...");
 
-            this.ConfigureConfigurationBody(configurationBuilder, configurationServicesProvider);
+            this.ConfigureConfigurationBody(configurationBuilder, configurationServiceProvider);
 
             this.Logger.LogDebug("Finished configuration of configuration builder.");
         }
@@ -32,7 +32,7 @@ namespace R5T.Richmond
         /// <summary>
         /// Base implementation does nothing.
         /// </summary>
-        protected virtual void ConfigureConfigurationBody(IConfigurationBuilder configurationBuilder, IServiceProvider configurationServicesProvider)
+        protected virtual void ConfigureConfigurationBody(IConfigurationBuilder configurationBuilder, IServiceProvider configurationServiceProvider)
         {
             // Do nothing.
         }
