@@ -118,5 +118,16 @@ namespace R5T.Richmond
             var serviceProvider = applicationBuilder.UseStartup<TStartup, TConfigurationStartup>(ApplicationBuilderHelper.GetEmptyServiceProvider);
             return serviceProvider;
         }
+
+        public static IServiceProvider UseStartup<TStartup, TConfigurationStartup, TConfigurationConfigurationStartup>(this ApplicationBuilder applicationBuilder)
+            where TStartup : class, IApplicationStartup
+            where TConfigurationStartup : class, IApplicationConfigurationStartup
+            where TConfigurationConfigurationStartup: class, IApplicationConfigurationStartup
+        {
+            var configurationConfigurationServiceProvider = applicationBuilder.UseStartup<TConfigurationConfigurationStartup>(ApplicationBuilderHelper.GetEmptyServiceProvider);
+
+            var serviceProvider = applicationBuilder.UseStartup<TStartup, TConfigurationStartup>(configurationConfigurationServiceProvider);
+            return serviceProvider;
+        }
     }
 }
