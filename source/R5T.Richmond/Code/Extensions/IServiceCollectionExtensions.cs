@@ -11,11 +11,9 @@ namespace R5T.Richmond.Extensions
         /// Adds the startup class type in the standard way; as a service-type-is-implementation-type singleton.
         /// </summary>
         public static IServiceCollection AddStartup<TStartup>(this IServiceCollection services)
-        where TStartup : class, IStartup
+            where TStartup : class, IStartup
         {
-            services
-                .AddSingleton<TStartup>()
-                ;
+            services.AddSingleton<TStartup>();
 
             return services;
         }
