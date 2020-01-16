@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
+using R5T.Chamavia;
 using R5T.Sardinia;
 
 using R5T.Richmond.Extensions;
@@ -13,29 +14,10 @@ namespace R5T.Richmond
 {
     public static class ApplicationBuilderHelper
     {
-        /// <summary>
-        /// Gets an empty startup configuration instance.
-        /// </summary>
-        public static IConfiguration GetEmptyConfiguration()
-        {
-            var emptyConfiguration = new ConfigurationBuilder()
-                .Build();
-
-            return emptyConfiguration;
-        }
-
-        public static IServiceProvider GetEmptyServiceProvider()
-        {
-            var emptyServiceProvider = new ServiceCollection()
-                .BuildServiceProvider();
-
-            return emptyServiceProvider;
-        }
-
         public static TStartup GetStartupInstance<TStartup>()
             where TStartup : class, IApplicationStartup
         {
-            var emptyConfiguration = ApplicationBuilderHelper.GetEmptyConfiguration();
+            var emptyConfiguration = ConfigurationHelper.GetEmptyConfiguration();
 
             var startupServiceProvider = ApplicationBuilderHelper.GetStartupServiceProvider<TStartup>(emptyConfiguration, ApplicationBuilderHelper.DefaultAddLogging);
 

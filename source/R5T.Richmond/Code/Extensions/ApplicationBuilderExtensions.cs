@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
+using R5T.Dacia;
 using R5T.Sardinia;
 
 
@@ -66,7 +67,7 @@ namespace R5T.Richmond
         public static IServiceProvider UseStartup<TStartup>(this ApplicationBuilder applicationBuilder)
             where TStartup : class, IApplicationStartup
         {
-            var serviceProvider = applicationBuilder.UseStartup<TStartup>(ApplicationBuilderHelper.GetEmptyServiceProvider);
+            var serviceProvider = applicationBuilder.UseStartup<TStartup>(ServiceProviderHelper.GetEmptyServiceProvider);
             return serviceProvider;
         }
     }
@@ -115,7 +116,7 @@ namespace R5T.Richmond
             where TStartup : class, IApplicationStartup
             where TConfigurationStartup : class, IApplicationConfigurationStartup
         {
-            var serviceProvider = applicationBuilder.UseStartup<TStartup, TConfigurationStartup>(ApplicationBuilderHelper.GetEmptyServiceProvider);
+            var serviceProvider = applicationBuilder.UseStartup<TStartup, TConfigurationStartup>(ServiceProviderHelper.GetEmptyServiceProvider);
             return serviceProvider;
         }
 
@@ -124,7 +125,7 @@ namespace R5T.Richmond
             where TConfigurationStartup : class, IApplicationConfigurationStartup
             where TConfigurationConfigurationStartup: class, IApplicationConfigurationStartup
         {
-            var configurationConfigurationServiceProvider = applicationBuilder.UseStartup<TConfigurationConfigurationStartup>(ApplicationBuilderHelper.GetEmptyServiceProvider);
+            var configurationConfigurationServiceProvider = applicationBuilder.UseStartup<TConfigurationConfigurationStartup>(ServiceProviderHelper.GetEmptyServiceProvider);
 
             var serviceProvider = applicationBuilder.UseStartup<TStartup, TConfigurationStartup>(configurationConfigurationServiceProvider);
             return serviceProvider;
