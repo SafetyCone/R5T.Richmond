@@ -2,6 +2,7 @@
 
 using R5T.Dacia;
 using R5T.Tromso.ServiceProvider;
+using R5T.Tromso.Startup;
 
 
 namespace R5T.Richmond
@@ -18,7 +19,7 @@ namespace R5T.Richmond
         public static IServiceProvider UseStartup<TStartup>(this ApplicationBuilder applicationBuilder, IServiceProvider configurationServiceProvider)
             where TStartup : class, IApplicationStartup
         {
-            var serviceProvider = ServiceProvider.New().UseStartup<TStartup>(configurationServiceProvider);
+            var serviceProvider = ServiceProvider.New().UseStartup<TStartup, IServiceProvider>(configurationServiceProvider);
             return serviceProvider;
         }
 
