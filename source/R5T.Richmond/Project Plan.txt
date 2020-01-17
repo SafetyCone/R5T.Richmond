@@ -1,4 +1,4 @@
-R5T.Richmond - A library containing two-stage startup depenency-injection container configuration.
+R5T.Richmond - A library containing two-stage startup dependency-injection container configuration.
 
 Work based on R5T.Gaul library.
 
