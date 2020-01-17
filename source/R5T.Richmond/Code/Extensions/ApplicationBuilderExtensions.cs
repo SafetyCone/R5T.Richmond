@@ -1,11 +1,7 @@
 ﻿using System;
 
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-
 using R5T.Dacia;
-using R5T.Sardinia;
+using R5T.Tromso.ServiceProvider;
 
 
 namespace R5T.Richmond
@@ -22,29 +18,8 @@ namespace R5T.Richmond
         public static IServiceProvider UseStartup<TStartup>(this ApplicationBuilder applicationBuilder, IServiceProvider configurationServiceProvider)
             where TStartup : class, IApplicationStartup
         {
-            // Build the standard startup.
-            var applicationStartup = ApplicationBuilderHelper.GetStartupInstance<TStartup>();
-
-            // Configuration.
-            var applicationConfigurationBuilder = new ConfigurationBuilder();
-
-            applicationStartup.ConfigureConfiguration(applicationConfigurationBuilder, configurationServiceProvider);
-
-            var applicationConfiguration = applicationConfigurationBuilder.Build();
-
-            // Configure services.
-            var applicationServices = new ServiceCollection();
-
-            applicationServices.AddConfiguration(applicationConfiguration); // Allow the startup class to access its configuration as a service during configuration of services.
-
-            applicationStartup.ConfigureServices(applicationServices);
-
-            var applicationServiceProvider = applicationServices.BuildServiceProvider();
-
-            // Configure service instances.
-            applicationStartup.Configure(applicationServiceProvider);
-
-            return applicationServiceProvider;
+            var serviceProvider = ServiceProvider.New().UseStartup<TStartup>(configurationServiceProvider);
+            return serviceProvider;
         }
 
         /// <summary>
