@@ -7,6 +7,5 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\R5T.Richmond.Abstractions\source\R5T.Richmond.Abstractions\R5T.Richmond.Abstractions.csproj" />
     <ProjectReference Include="..\..\..\R5T.Tromso.ServiceProvider\source\R5T.Tromso.ServiceProvider\R5T.Tromso.ServiceProvider.csproj" />
-    <ProjectReference Include="..\..\..\R5T.Tromso.Types\source\R5T.Tromso.Types\R5T.Tromso.Types.csproj" />
   </ItemGroup>
 </Project>
