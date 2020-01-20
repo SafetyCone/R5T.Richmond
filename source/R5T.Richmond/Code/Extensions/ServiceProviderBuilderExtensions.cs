@@ -10,14 +10,14 @@ namespace R5T.Richmond
     /// <summary>
     /// Basic extensions to the <see cref="ApplicationBuilder"/> type allowing use of a startup type to configure a service provider.
     /// </summary>
-    public static class BasicApplicationBuilderExtensions
+    public static class ServiceProviderBuilderExtensions
     {
         /// <summary>
         /// Uses the <typeparamref name="TStartup"/> type configure a service provider instance.
         /// The provided <paramref name="configurationServiceProvider"/> provides services during the configuration configuration process.
         /// </summary>
-        public static IServiceProvider UseStartup<TStartup>(this ApplicationBuilder applicationBuilder, IServiceProvider configurationServiceProvider)
-            where TStartup : class, IApplicationStartup
+        public static IServiceProvider UseStartup<TStartup>(this ServiceProviderBuilder serviceProviderBuilder, IServiceProvider configurationServiceProvider)
+            where TStartup : class, IStartup
         {
             var serviceProvider = ServiceProvider.New().UseStartup<TStartup, IServiceProvider>(configurationServiceProvider);
             return serviceProvider;
@@ -27,12 +27,12 @@ namespace R5T.Richmond
         /// Uses the <typeparamref name="TStartup"/> type configure a service provider instance.
         /// The <paramref name="configurationServicesProviderProvider"/> provides a service provider that provides services during the configuration configuration process.
         /// </summary>
-        public static IServiceProvider UseStartup<TStartup>(this ApplicationBuilder applicationBuilder, Func<IServiceProvider> configurationServicesProviderProvider)
-            where TStartup : class, IApplicationStartup
+        public static IServiceProvider UseStartup<TStartup>(this ServiceProviderBuilder serviceProviderBuilder, Func<IServiceProvider> configurationServicesProviderProvider)
+            where TStartup : class, IStartup
         {
             var configurationServicesProvider = configurationServicesProviderProvider();
 
-            var serviceProvider = applicationBuilder.UseStartup<TStartup>(configurationServicesProvider);
+            var serviceProvider = serviceProviderBuilder.UseStartup<TStartup>(configurationServicesProvider);
             return serviceProvider;
         }
 
@@ -40,10 +40,10 @@ namespace R5T.Richmond
         /// Uses the <typeparamref name="TStartup"/> type configure a service provider instance.
         /// An empty service provider is provided during the configuration configuration process.
         /// </summary>
-        public static IServiceProvider UseStartup<TStartup>(this ApplicationBuilder applicationBuilder)
-            where TStartup : class, IApplicationStartup
+        public static IServiceProvider UseStartup<TStartup>(this ServiceProviderBuilder serviceProviderBuilder)
+            where TStartup : class, IStartup
         {
-            var serviceProvider = applicationBuilder.UseStartup<TStartup>(ServiceProviderHelper.GetEmptyServiceProvider);
+            var serviceProvider = serviceProviderBuilder.UseStartup<TStartup>(ServiceProviderHelper.GetEmptyServiceProvider);
             return serviceProvider;
         }
     }
@@ -58,13 +58,13 @@ namespace R5T.Richmond
         /// Uses the <typeparamref name="TConfigurationStartup"/> type to configure a service provider that provides services during the configuration configuration process.
         /// The <paramref name="configurationStartupConfigurationServicesProvider"/> provides services during the configuration configuration process of the service provider that provides services during the configuration configuration process.
         /// </summary>
-        public static IServiceProvider UseStartup<TStartup, TConfigurationStartup>(this ApplicationBuilder applicationBuilder, IServiceProvider configurationStartupConfigurationServicesProvider)
-                where TStartup : class, IApplicationStartup
-                where TConfigurationStartup : class, IApplicationConfigurationStartup
+        public static IServiceProvider UseStartup<TStartup, TConfigurationStartup>(this ServiceProviderBuilder serviceProviderBuilder, IServiceProvider configurationStartupConfigurationServicesProvider)
+                where TStartup : class, IStartup
+                where TConfigurationStartup : class, IConfigurationStartup
         {
-            var configurationServiceProvider = applicationBuilder.UseStartup<TConfigurationStartup>(configurationStartupConfigurationServicesProvider);
+            var configurationServiceProvider = serviceProviderBuilder.UseStartup<TConfigurationStartup>(configurationStartupConfigurationServicesProvider);
 
-            var serviceProvider = applicationBuilder.UseStartup<TStartup>(configurationServiceProvider);
+            var serviceProvider = serviceProviderBuilder.UseStartup<TStartup>(configurationServiceProvider);
             return serviceProvider;
         }
 
@@ -73,13 +73,13 @@ namespace R5T.Richmond
         /// Uses the <typeparamref name="TConfigurationStartup"/> type to configure a service provider that provides services during the configuration configuration process.
         /// The <paramref name="configurationStartupConfigurationServicesProviderProvider"/> provides a service provider that provides services during the configuration configuration process of the service provider that provides services during the configuration configuration process.
         /// </summary>
-        public static IServiceProvider UseStartup<TStartup, TConfigurationStartup>(this ApplicationBuilder applicationBuilder, Func<IServiceProvider> configurationStartupConfigurationServicesProviderProvider)
-            where TStartup : class, IApplicationStartup
-            where TConfigurationStartup : class, IApplicationConfigurationStartup
+        public static IServiceProvider UseStartup<TStartup, TConfigurationStartup>(this ServiceProviderBuilder serviceProviderBuilder, Func<IServiceProvider> configurationStartupConfigurationServicesProviderProvider)
+            where TStartup : class, IStartup
+            where TConfigurationStartup : class, IConfigurationStartup
         {
             var configurationStartupConfigurationServicesProvider = configurationStartupConfigurationServicesProviderProvider();
 
-            var serviceProvider = applicationBuilder.UseStartup<TStartup, TConfigurationStartup>(configurationStartupConfigurationServicesProvider);
+            var serviceProvider = serviceProviderBuilder.UseStartup<TStartup, TConfigurationStartup>(configurationStartupConfigurationServicesProvider);
             return serviceProvider;
         }
 
@@ -88,22 +88,22 @@ namespace R5T.Richmond
         /// Uses the <typeparamref name="TConfigurationStartup"/> type to configure a service provider that provides services during the configuration configuration process.
         /// An empty service provider is provided during the configuration configuration process of the service provider that provides services during the configuration configuration process.
         /// </summary>
-        public static IServiceProvider UseStartup<TStartup, TConfigurationStartup>(this ApplicationBuilder applicationBuilder)
-            where TStartup : class, IApplicationStartup
-            where TConfigurationStartup : class, IApplicationConfigurationStartup
+        public static IServiceProvider UseStartup<TStartup, TConfigurationStartup>(this ServiceProviderBuilder serviceProviderBuilder)
+            where TStartup : class, IStartup
+            where TConfigurationStartup : class, IConfigurationStartup
         {
-            var serviceProvider = applicationBuilder.UseStartup<TStartup, TConfigurationStartup>(ServiceProviderHelper.GetEmptyServiceProvider);
+            var serviceProvider = serviceProviderBuilder.UseStartup<TStartup, TConfigurationStartup>(ServiceProviderHelper.GetEmptyServiceProvider);
             return serviceProvider;
         }
 
-        public static IServiceProvider UseStartup<TStartup, TConfigurationStartup, TConfigurationConfigurationStartup>(this ApplicationBuilder applicationBuilder)
-            where TStartup : class, IApplicationStartup
-            where TConfigurationStartup : class, IApplicationConfigurationStartup
-            where TConfigurationConfigurationStartup: class, IApplicationConfigurationStartup
+        public static IServiceProvider UseStartup<TStartup, TConfigurationStartup, TConfigurationConfigurationStartup>(this ServiceProviderBuilder serviceProviderBuilder)
+            where TStartup : class, IStartup
+            where TConfigurationStartup : class, IConfigurationStartup
+            where TConfigurationConfigurationStartup: class, IConfigurationStartup
         {
-            var configurationConfigurationServiceProvider = applicationBuilder.UseStartup<TConfigurationConfigurationStartup>(ServiceProviderHelper.GetEmptyServiceProvider);
+            var configurationConfigurationServiceProvider = serviceProviderBuilder.UseStartup<TConfigurationConfigurationStartup>(ServiceProviderHelper.GetEmptyServiceProvider);
 
-            var serviceProvider = applicationBuilder.UseStartup<TStartup, TConfigurationStartup>(configurationConfigurationServiceProvider);
+            var serviceProvider = serviceProviderBuilder.UseStartup<TStartup, TConfigurationStartup>(configurationConfigurationServiceProvider);
             return serviceProvider;
         }
     }
