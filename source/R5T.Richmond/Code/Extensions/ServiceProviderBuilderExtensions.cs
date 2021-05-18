@@ -43,7 +43,7 @@ namespace R5T.Richmond
         public static IServiceProvider UseStartup<TStartup>(this ServiceProviderBuilder serviceProviderBuilder)
             where TStartup : class, IStartup
         {
-            var serviceProvider = serviceProviderBuilder.UseStartup<TStartup>(ServiceProviderHelper.GetEmptyServiceProvider);
+            var serviceProvider = serviceProviderBuilder.UseStartup<TStartup>(ServiceProviderHelper.GetNewEmptyServiceProvider);
             return serviceProvider;
         }
     }
@@ -92,7 +92,7 @@ namespace R5T.Richmond
             where TStartup : class, IStartup
             where TConfigurationStartup : class, IConfigurationStartup
         {
-            var serviceProvider = serviceProviderBuilder.UseStartup<TStartup, TConfigurationStartup>(ServiceProviderHelper.GetEmptyServiceProvider);
+            var serviceProvider = serviceProviderBuilder.UseStartup<TStartup, TConfigurationStartup>(ServiceProviderHelper.GetNewEmptyServiceProvider);
             return serviceProvider;
         }
 
@@ -101,7 +101,7 @@ namespace R5T.Richmond
             where TConfigurationStartup : class, IConfigurationStartup
             where TConfigurationConfigurationStartup: class, IConfigurationStartup
         {
-            var configurationConfigurationServiceProvider = serviceProviderBuilder.UseStartup<TConfigurationConfigurationStartup>(ServiceProviderHelper.GetEmptyServiceProvider);
+            var configurationConfigurationServiceProvider = serviceProviderBuilder.UseStartup<TConfigurationConfigurationStartup>(ServiceProviderHelper.GetNewEmptyServiceProvider);
 
             var serviceProvider = serviceProviderBuilder.UseStartup<TStartup, TConfigurationStartup>(configurationConfigurationServiceProvider);
             return serviceProvider;
